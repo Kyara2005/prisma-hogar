@@ -15,17 +15,20 @@ export const blogPosts: BlogPost[] = [
     slug: "como-elegir-sabanas-perfectas",
     title: "Cómo elegir las sábanas perfectas",
     excerpt:
-      "Hilos, tejidos y caídas: una guía práctica para dormir mejor sin complicarte con jerga técnica.",
+      "Hilos, tejidos y caídas: una guía práctica — y un reel — para dormir mejor sin complicarte.",
     cover:
       "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80",
     date: "2026-07-12",
     readTime: "5 min",
     category: "Guías",
+    videoUrl:
+      "https://www.instagram.com/reel/Dboe0pcCezh/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     content: [
       "Elegir sábanas no se trata solo de color. El tejido define si tu cama se siente fresca, cálida o con ese acabado hotelero que todos buscan.",
       "Si vives en un clima cálido, el percale y el lino son aliados: dejan circular el aire y mantienen una sensación seca. En climas más frescos, un satén de algodón o un jersey aportan más envolvente.",
       "Mira también el gramaje y el acabado. Un buen juego de sábanas se siente suave desde el primer lavado, no después de meses. En Prisma Hogar priorizamos tejidos que envejecen bien.",
       "Tip rápido: mide tu colchón (alto incluido) antes de comprar la bajera. Un elástico justo evita arrugas y deslizamientos molestos durante la noche.",
+      "En el reel de Instagram te mostramos cómo lucen nuestras sábanas en un dormitorio real. Ábrelo al final de esta nota para ver la recomendación en movimiento.",
     ],
   },
   {
@@ -66,18 +69,16 @@ export const blogPosts: BlogPost[] = [
     slug: "recomendacion-coleccion-exquisita",
     title: "Recomendación: Colección de ropa de cama exquisita",
     excerpt:
-      "Mira cómo lucen nuestras piezas en un dormitorio real y arma tu set favorito con sábanas, cobijas y almohadas.",
+      "Arma tu set favorito con sábanas, cobijas y almohadas en tonos neutros que elevan cualquier habitación.",
     cover:
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80",
     date: "2026-08-05",
     readTime: "3 min",
-    category: "Video",
-    videoUrl:
-      "https://www.instagram.com/reel/Dboe0pcCezh/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    category: "Estilo",
     content: [
-      "En este reel de Instagram te mostramos detalles de nuestra colección: texturas, caídas y combinaciones que transforman cualquier habitación.",
       "Si buscas un look limpio y cálido, empieza por sábanas en tono marfil, un duvet voluminoso y almohadas de contraste en carbón o con un patrón geométrico suave.",
-      "Haz clic en el video para ver la recomendación completa en Instagram y luego vuelve a la tienda para armar tu carrito con las piezas que más te gusten.",
+      "Combina texturas: un sherpa al pie de la cama, un quilt geométrico y un throw tejido aportan profundidad sin saturar.",
+      "Vuelve a la tienda y arma tu carrito con las piezas que más te gusten; todas están pensadas para combinar entre sí.",
     ],
   },
   {
@@ -86,7 +87,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "De lado, boca arriba o boca abajo: qué firmeza y altura conviene para despertar sin tensión.",
     cover:
-      "https://images.unsplash.com/photo-1616627561950-56f62020575b?w=1200&q=80",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80",
     date: "2026-06-20",
     readTime: "5 min",
     category: "Guías",

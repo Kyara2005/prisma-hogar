@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { Figtree, Fraunces } from "next/font/google";
+import { Raleway } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import "./globals.css";
 
-const figtree = Figtree({
-  variable: "--font-figtree",
+const raleway = Raleway({
+  variable: "--font-raleway",
   subsets: ["latin"],
   display: "swap",
-});
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -33,11 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="es"
-      className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
-    >
-      <body className="texture-grain flex min-h-full flex-col">
+    <html lang="es" className={`${raleway.variable} h-full antialiased`}>
+      <body className="texture-grain flex min-h-full flex-col font-sans">
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -13,6 +13,7 @@ export function Footer() {
               width={48}
               height={48}
               className="h-12 w-12 rounded-full bg-white object-contain p-1"
+              unoptimized
             />
             <span className="font-display text-2xl tracking-tight">
               Prisma Hogar
@@ -32,6 +33,11 @@ export function Footer() {
             <li>
               <Link href="/#tienda" className="hover:text-white">
                 Tienda
+              </Link>
+            </li>
+            <li>
+              <Link href="/catalogo" className="hover:text-white">
+                Catálogo completo
               </Link>
             </li>
             <li>
@@ -85,9 +91,32 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10 py-5 text-center text-xs text-white/45">
-        © {new Date().getFullYear()} Prisma Hogar S.A. Todos los derechos
-        reservados.
+
+      <div className="border-t border-white/10 px-4 py-5 sm:px-6">
+        <p className="mx-auto max-w-3xl text-center text-xs leading-relaxed text-white/55">
+          Esto es un demo comercial de Fermenta para este negocio con mucho
+          esfuerzo, en el caso de ser rechazado completamente solicitar por
+          favor darlo de baja al número{" "}
+          <a
+            href="https://wa.me/593969088646"
+            className="underline underline-offset-2 hover:text-white"
+          >
+            0969088646
+          </a>{" "}
+          —{" "}
+          <a
+            href="https://fermenta.online"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-white"
+          >
+            fermenta.online
+          </a>
+        </p>
+        <p className="mt-3 text-center text-xs text-white/40">
+          © {new Date().getFullYear()} Prisma Hogar S.A. Todos los derechos
+          reservados.
+        </p>
       </div>
     </footer>
   );

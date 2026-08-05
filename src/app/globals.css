@@ -22,8 +22,8 @@
   --color-accent-deep: var(--accent-deep);
   --color-ink: var(--ink);
   --color-line: var(--line);
-  --font-sans: var(--font-figtree);
-  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-raleway);
+  --font-display: var(--font-raleway);
 }
 
 * {
@@ -40,7 +40,7 @@ body {
     radial-gradient(ellipse 60% 40% at 100% 0%, #ddd4c4 0%, transparent 45%),
     var(--background);
   color: var(--foreground);
-  font-family: var(--font-figtree), system-ui, sans-serif;
+  font-family: var(--font-raleway), system-ui, sans-serif;
 }
 
 ::selection {
@@ -49,7 +49,9 @@ body {
 }
 
 .font-display {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-raleway), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .texture-grain {
@@ -88,6 +90,36 @@ body {
   }
 }
 
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+@keyframes float-soft-alt {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-4deg);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
 .animate-rise {
   animation: rise-in 0.7s ease-out both;
 }
@@ -98,4 +130,16 @@ body {
 
 .animate-cart-pop {
   animation: cart-pop 0.35s ease;
+}
+
+.animate-float {
+  animation: float-soft 5.5s ease-in-out infinite;
+}
+
+.animate-float-alt {
+  animation: float-soft-alt 6.5s ease-in-out infinite;
+}
+
+.animate-drift {
+  animation: drift 7s ease-in-out infinite;
 }

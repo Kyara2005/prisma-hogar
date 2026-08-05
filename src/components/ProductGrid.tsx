@@ -1,16 +1,18 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { categories, products, type Category } from "@/data/products";
+import Link from "next/link";
+import { useMemo } from "react";
+import { products } from "@/data/products";
 import { ProductCard } from "./ProductCard";
 
-export function ProductGrid() {
-  const [filter, setFilter] = useState<Category | "todos">("todos");
+const PREVIEW_LIMIT = 6;
 
-  const filtered = useMemo(() => {
-    if (filter === "todos") return products;
-    return products.filter((p) => p.category === filter);
-  }, [filter]);
+export function ProductGrid() {
+  const preview = useMemo(() => {
+    const featured = products.filter((p) => p.featured);
+    const rest = products.filter((p) => !p.featured);
+    return [...featured, ...rest].slice(0, PREVIEW_LIMIT);
+  }, []);
 
   return (
     <section id="tienda" className="scroll-mt-24 py-20 sm:py-24">
@@ -23,36 +25,28 @@ export function ProductGrid() {
             Todo para tu cama
           </h2>
           <p className="mt-3 text-muted">
-            Elige categoría, personaliza tamaño y color, y suma al carrito en un
-            clic.
+            Una selección de 6 productos destacados. Entra al catálogo completo
+            para filtrar por categoría, incluido Infantil.
           </p>
         </div>
 
-        <div className="mt-8 flex gap-2 overflow-x-auto pb-2">
-          {categories.map((cat) => {
-            const active = filter === cat.id;
-            return (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setFilter(cat.id)}
-                className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition ${
-                  active
-                    ? "border-ink bg-ink text-white"
-                    : "border-line bg-surface text-muted hover:border-ink/30 hover:text-ink"
-                }`}
-              >
-                {cat.label}
-              </button>
-            );
-          })}
-        </div>
-
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((product) => (
+          {preview.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+
+        <div className="mt-14 flex justify-center">
+          <Link
+            href="/catalogo"
+            className="rounded-full bg-ink px-8 py-3.5 text-sm font-bold text-white transition hover:bg-accent-deep"
+          >
+            Ver catálogo completo
+          </Link>
+        </div>
+        <p className="mt-3 text-center text-xs text-muted">
+          {products.length} productos en total
+        </p>
       </div>
     </section>
   );

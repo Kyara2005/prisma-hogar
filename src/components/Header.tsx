@@ -14,16 +14,8 @@ const links = [
 
 export function Header() {
   const { itemCount, openCart } = useCart();
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [pop, setPop] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     if (itemCount === 0) return;
@@ -33,13 +25,7 @@ export function Header() {
   }, [itemCount]);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-line bg-surface/90 backdrop-blur-md shadow-[0_8px_30px_rgba(31,28,24,0.06)]"
-          : "bg-transparent"
-      }`}
-    >
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/40 bg-white/92 shadow-[0_8px_30px_rgba(31,28,24,0.08)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-20 sm:px-6">
         <Link href="/" className="group flex items-center gap-2.5">
           <Image
@@ -47,8 +33,9 @@ export function Header() {
             alt="Prisma Hogar"
             width={44}
             height={44}
-            className="h-10 w-10 object-contain transition-transform duration-300 group-hover:scale-105 sm:h-11 sm:w-11"
+            className="h-10 w-10 bg-transparent object-contain transition-transform duration-300 group-hover:scale-105 sm:h-11 sm:w-11"
             priority
+            unoptimized
           />
           <span className="font-display text-xl tracking-tight text-ink sm:text-2xl">
             Prisma <span className="text-accent">Hogar</span>
@@ -60,7 +47,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted transition-colors hover:text-ink"
+              className="text-sm font-semibold text-ink/80 transition-colors hover:text-accent-deep"
             >
               {link.label}
             </Link>
@@ -71,7 +58,7 @@ export function Header() {
           <button
             type="button"
             onClick={openCart}
-            className="relative inline-flex h-11 items-center gap-2 rounded-full border border-line bg-surface px-3.5 text-sm font-medium text-ink transition hover:border-accent/40 hover:bg-surface-2"
+            className="relative inline-flex h-11 items-center gap-2 rounded-full border border-line bg-surface px-3.5 text-sm font-semibold text-ink transition hover:border-accent/40 hover:bg-surface-2"
             aria-label="Abrir carrito"
           >
             <CartIcon />
@@ -104,14 +91,14 @@ export function Header() {
       </div>
 
       {menuOpen && (
-        <div className="border-t border-line bg-surface px-4 py-4 md:hidden">
+        <div className="border-t border-line bg-white px-4 py-4 md:hidden">
           <div className="flex flex-col gap-3">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="rounded-lg px-3 py-2 text-base font-medium text-ink hover:bg-surface-2"
+                className="rounded-lg px-3 py-2 text-base font-semibold text-ink hover:bg-surface-2"
               >
                 {link.label}
               </Link>
