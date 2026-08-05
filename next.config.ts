@@ -1,12 +1,14 @@
 import type { NextConfig } from "next";
 
+/** Set GITHUB_PAGES=true in CI to enable /prisma-hogar basePath for GitHub Pages. */
 const repo = "prisma-hogar";
 const isGithubPages = process.env.GITHUB_PAGES === "true";
-const basePath = isGithubPages ? `/${repo}` : "";
+const basePath =
+  process.env.NEXT_PUBLIC_BASE_PATH ?? (isGithubPages ? `/${repo}` : "");
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath,
+  basePath: basePath || undefined,
   assetPrefix: basePath ? `${basePath}/` : undefined,
   trailingSlash: true,
   images: {
@@ -17,9 +19,6 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
-  },
-  env: {
-    NEXT_PUBLIC_BASE_PATH: basePath,
   },
 };
 

@@ -34,6 +34,7 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: "true"
+          NEXT_PUBLIC_BASE_PATH: /prisma-hogar
 
       - name: Ensure .nojekyll
         run: touch out/.nojekyll

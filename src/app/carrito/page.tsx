@@ -1,10 +1,10 @@
 "use client";
 
-import { AppImage } from "@/components/AppImage";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/data/products";
+import { AppImage } from "@/components/AppImage";
 
 export default function CarritoPage() {
   const { items, updateQuantity, removeItem, subtotal, clearCart } = useCart();

@@ -1,10 +1,10 @@
 "use client";
 
-import { AppImage } from "@/components/AppImage";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { categories, products, type Category } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
+import { AppImage } from "@/components/AppImage";
 
 export default function CatalogoPage() {
   const [filter, setFilter] = useState<Category | "todos">("todos");
