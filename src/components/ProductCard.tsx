@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { AppImage } from "./AppImage";
 import { useState } from "react";
 import type { Product } from "@/data/products";
 import { formatPrice } from "@/data/products";
@@ -21,7 +21,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(31,28,24,0.08)]">
       <div className="relative aspect-[4/5] overflow-hidden bg-surface-2">
-        <Image
+        <AppImage
           src={product.image}
           alt={product.name}
           fill

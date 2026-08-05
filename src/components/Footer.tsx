@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { AppImage } from "./AppImage";
 
 export function Footer() {
   return (
@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Link href="/" className="inline-flex items-center gap-3">
-            <Image
+            <AppImage
               src="/logo.png"
               alt="Prisma Hogar"
               width={48}

@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
+import { AppImage } from "./AppImage";
 
 export function Hero() {
   return (
     <section className="relative min-h-[100svh] overflow-hidden">
-      <Image
+      <AppImage
         src="/hero.png"
         alt="Colección de ropa de cama exquisita"
         fill
@@ -18,7 +18,7 @@ export function Hero() {
       <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20 md:justify-center md:pb-0">
         <div className="max-w-xl animate-rise">
           <div className="mb-5 flex items-center gap-3">
-            <Image
+            <AppImage
               src="/logo.png"
               alt=""
               width={56}

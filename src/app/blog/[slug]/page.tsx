@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { AppImage } from "@/components/AppImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -30,7 +30,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <article className="pt-16 sm:pt-20">
       <div className="relative h-[42vh] min-h-[280px] w-full overflow-hidden sm:h-[48vh]">
-        <Image
+        <AppImage
           src={post.cover}
           alt={post.title}
           fill

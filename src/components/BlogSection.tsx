@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { AppImage } from "./AppImage";
 import { blogPosts } from "@/data/blog";
 
 function BeddingShapes() {
@@ -64,7 +64,7 @@ export function BlogSection({ limit }: { limit?: number }) {
       className="relative scroll-mt-24 overflow-hidden py-20 sm:py-24"
     >
       <div className="absolute inset-0">
-        <Image
+        <AppImage
           src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1600&q=80"
           alt=""
           fill
@@ -109,7 +109,7 @@ export function BlogSection({ limit }: { limit?: number }) {
               className="group overflow-hidden rounded-2xl border border-line bg-surface/95 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(31,28,24,0.08)]"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
-                <Image
+                <AppImage
                   src={post.cover}
                   alt={post.title}
                   fill

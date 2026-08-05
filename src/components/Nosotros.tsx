@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { AppImage } from "./AppImage";
 
 export function Nosotros() {
   return (
@@ -8,7 +8,7 @@ export function Nosotros() {
       className="relative scroll-mt-24 overflow-hidden py-20 sm:py-24"
     >
       <div className="absolute inset-0">
-        <Image
+        <AppImage
           src="/hero.png"
           alt=""
           fill
@@ -21,7 +21,7 @@ export function Nosotros() {
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
         <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-surface-2 shadow-lg sm:aspect-[5/4] lg:aspect-[4/5]">
-          <Image
+          <AppImage
             src="/hero.png"
             alt="Ambiente Prisma Hogar"
             fill

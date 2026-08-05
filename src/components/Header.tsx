@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { AppImage } from "./AppImage";
 
 const links = [
   { href: "/#tienda", label: "Tienda" },
@@ -28,7 +28,7 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/40 bg-white/92 shadow-[0_8px_30px_rgba(31,28,24,0.08)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-20 sm:px-6">
         <Link href="/" className="group flex items-center gap-2.5">
-          <Image
+          <AppImage
             src="/logo.png"
             alt="Prisma Hogar"
             width={44}

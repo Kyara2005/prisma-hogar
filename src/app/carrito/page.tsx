@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { AppImage } from "@/components/AppImage";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "@/context/CartContext";
@@ -69,7 +69,7 @@ export default function CarritoPage() {
                 className="flex gap-4 rounded-2xl border border-line bg-surface p-4"
               >
                 <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-surface-2">
-                  <Image
+                  <AppImage
                     src={item.product.image}
                     alt={item.product.name}
                     fill

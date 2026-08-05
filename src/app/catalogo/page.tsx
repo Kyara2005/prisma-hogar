@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { AppImage } from "@/components/AppImage";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { categories, products, type Category } from "@/data/products";
@@ -17,7 +17,7 @@ export default function CatalogoPage() {
   return (
     <div className="relative min-h-screen pt-16 sm:pt-20">
       <div className="pointer-events-none absolute inset-0">
-        <Image
+        <AppImage
           src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1600&q=80"
           alt=""
           fill

@@ -10,6 +10,8 @@ const raleway = Raleway({
   weight: ["300", "400", "500", "600", "700", "800"],
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const metadata: Metadata = {
   title: {
     default: "Prisma Hogar | Ropa de cama exquisita",
@@ -18,8 +20,13 @@ export const metadata: Metadata = {
   description:
     "Tienda online de sábanas, cobijas, duvets, edredones, protectores y almohadas. Compra fácil y agrega al carrito.",
   icons: {
-    icon: "/logo.png",
+    icon: `${basePath}/logo.png`,
   },
+  metadataBase: new URL(
+    process.env.GITHUB_PAGES === "true"
+      ? "https://kyara2005.github.io/prisma-hogar/"
+      : "http://localhost:3000",
+  ),
 };
 
 export default function RootLayout({

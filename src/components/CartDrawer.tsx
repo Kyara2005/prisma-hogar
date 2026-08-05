@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { AppImage } from "./AppImage";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/data/products";
 
@@ -61,7 +61,7 @@ export function CartDrawer() {
                   className="flex gap-3 border-b border-line pb-4"
                 >
                   <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-surface-2">
-                    <Image
+                    <AppImage
                       src={item.product.image}
                       alt={item.product.name}
                       fill

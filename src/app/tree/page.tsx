@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { AppImage } from "@/components/AppImage";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -44,7 +44,7 @@ export default function TreePage() {
   return (
     <div className="relative min-h-[100svh] overflow-hidden px-4 pb-16 pt-28 sm:px-6">
       <div className="pointer-events-none absolute inset-0">
-        <Image
+        <AppImage
           src="/hero.png"
           alt=""
           fill
@@ -56,7 +56,7 @@ export default function TreePage() {
 
       <div className="relative mx-auto w-full max-w-md animate-rise">
         <div className="flex flex-col items-center text-center">
-          <Image
+          <AppImage
             src="/logo.png"
             alt="Prisma Hogar"
             width={88}
