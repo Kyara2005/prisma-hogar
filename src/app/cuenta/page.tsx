@@ -1,12 +1,40 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { AppImage } from "@/components/AppImage";
+import { ReceiptModal } from "@/components/ReceiptModal";
 import { formatPrice } from "@/data/products";
-import { useUser } from "@/context/UserContext";
+import {
+  PAYMENT_LABELS,
+  useUser,
+  type Purchase,
+} from "@/context/UserContext";
+import { shareReceipt } from "@/lib/receipt";
 
 export default function CuentaPage() {
   const { user, purchases, openAuth, logout } = useUser();
+  const [selected, setSelected] = useState<Purchase | null>(null);
+  const [receiptOpen, setReceiptOpen] = useState(false);
+  const [shareHint, setShareHint] = useState<Record<string, string>>({});
+
+  const openReceipt = (order: Purchase) => {
+    setSelected(order);
+    setReceiptOpen(true);
+  };
+
+  const handleShare = async (order: Purchase) => {
+    const result = await shareReceipt(order);
+    setShareHint((prev) => ({
+      ...prev,
+      [order.id]:
+        result === "shared"
+          ? "Compartido."
+          : result === "copied"
+            ? "Copiado al portapapeles."
+            : "No se pudo compartir. Ábrelo para descargar.",
+    }));
+  };
 
   if (!user) {
     return (
@@ -113,7 +141,7 @@ export default function CuentaPage() {
           Historial de compras
         </h2>
         <p className="mt-1 text-sm text-muted">
-          Pedidos confirmados desde este dispositivo.
+          Abre o comparte tus comprobantes cuando quieras.
         </p>
 
         {purchases.length === 0 ? (
@@ -149,10 +177,12 @@ export default function CuentaPage() {
                     {formatPrice(order.total)}
                   </p>
                 </div>
-                <p className="mt-2 text-sm text-muted">
-                  Envío a: {order.address}
-                  {order.phone ? ` · ${order.phone}` : ""}
-                </p>
+                <p className="mt-2 text-sm text-muted">Envío: {order.address}</p>
+                {order.paymentMethod && (
+                  <p className="mt-1 text-sm text-muted">
+                    Pago: {PAYMENT_LABELS[order.paymentMethod]}
+                  </p>
+                )}
                 <div className="mt-4 space-y-2">
                   {order.items.map((item) => (
                     <div
@@ -182,11 +212,39 @@ export default function CuentaPage() {
                     </div>
                   ))}
                 </div>
+
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => openReceipt(order)}
+                    className="rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-white"
+                  >
+                    Ver comprobante
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleShare(order)}
+                    className="rounded-full border border-line bg-background px-4 py-2.5 text-sm font-semibold text-ink"
+                  >
+                    Compartir
+                  </button>
+                </div>
+                {shareHint[order.id] && (
+                  <p className="mt-2 text-center text-xs text-accent-deep">
+                    {shareHint[order.id]}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
         )}
       </section>
+
+      <ReceiptModal
+        order={selected}
+        open={receiptOpen}
+        onClose={() => setReceiptOpen(false)}
+      />
     </div>
   );
 }

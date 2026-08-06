@@ -32,15 +32,30 @@ export type PurchaseItem = {
   image: string;
 };
 
+export type PaymentMethod = "deuna" | "card" | "transfer";
+
+export type DeliveryMode = "address" | "location";
+
 export type Purchase = {
   id: string;
   date: string;
   total: number;
   shipping: number;
   address: string;
-  phone: string;
+  phone?: string;
   note?: string;
+  paymentMethod?: PaymentMethod;
+  deliveryMode?: DeliveryMode;
+  location?: { lat: number; lng: number };
+  customerName?: string;
+  customerEmail?: string;
   items: PurchaseItem[];
+};
+
+export const PAYMENT_LABELS: Record<PaymentMethod, string> = {
+  deuna: "DeUna",
+  card: "Tarjeta",
+  transfer: "Transferencia",
 };
 
 type AuthResult = { ok: true } | { ok: false; error: string };
@@ -62,7 +77,7 @@ type UserContextValue = {
   }) => AuthResult;
   updateProfile: (data: Partial<UserProfile>) => void;
   logout: () => void;
-  savePurchase: (purchase: Omit<Purchase, "id" | "date">) => void;
+  savePurchase: (purchase: Omit<Purchase, "id" | "date">) => Purchase;
 };
 
 const UserContext = createContext<UserContextValue | null>(null);
@@ -259,10 +274,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const savePurchase = useCallback((purchase: Omit<Purchase, "id" | "date">) => {
     const entry: Purchase = {
       ...purchase,
-      id: `ord-${Date.now()}`,
+      id: `PH-${Date.now().toString().slice(-8)}`,
       date: new Date().toISOString(),
     };
     setPurchases((prev) => [entry, ...prev]);
+    return entry;
   }, []);
 
   const value = useMemo(
