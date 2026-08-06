@@ -33,7 +33,7 @@ export default function CarritoPage() {
     if (items.length === 0) return;
 
     if (!user) {
-      openAuth();
+      openAuth("login");
       return;
     }
 
@@ -87,10 +87,18 @@ export default function CarritoPage() {
           Para guardar la compra en tu cuenta,{" "}
           <button
             type="button"
-            onClick={openAuth}
+            onClick={() => openAuth("login")}
             className="font-semibold text-accent-deep underline"
           >
-            regístrate con tu correo
+            inicia sesión
+          </button>{" "}
+          o{" "}
+          <button
+            type="button"
+            onClick={() => openAuth("register")}
+            className="font-semibold text-accent-deep underline"
+          >
+            regístrate
           </button>
           .
         </div>

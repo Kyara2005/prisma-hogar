@@ -111,10 +111,10 @@ export function Header() {
             ) : (
               <button
                 type="button"
-                onClick={openAuth}
+                onClick={() => openAuth("login")}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface text-ink transition hover:border-accent/40 hover:bg-surface-2 sm:h-11 sm:w-11"
-                aria-label="Registrarse"
-                title="Registrarse"
+                aria-label="Iniciar sesión"
+                title="Iniciar sesión"
               >
                 <UserIcon />
               </button>

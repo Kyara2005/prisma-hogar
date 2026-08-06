@@ -37,10 +37,18 @@ export default function FavoritosPage() {
         <div className="mt-6 rounded-2xl border border-accent/30 bg-surface p-4 text-sm text-muted">
           <button
             type="button"
-            onClick={openAuth}
+            onClick={() => openAuth("login")}
             className="font-semibold text-accent-deep underline underline-offset-2"
           >
-            Regístrate con tu correo
+            Inicia sesión
+          </button>{" "}
+          o{" "}
+          <button
+            type="button"
+            onClick={() => openAuth("register")}
+            className="font-semibold text-accent-deep underline underline-offset-2"
+          >
+            regístrate
           </button>{" "}
           para asociar tus favoritos a tu cuenta en este dispositivo.
         </div>

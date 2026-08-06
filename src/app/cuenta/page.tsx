@@ -10,99 +10,132 @@ export default function CuentaPage() {
 
   if (!user) {
     return (
-      <div className="mx-auto max-w-xl px-4 pb-20 pt-28 text-center sm:px-6">
-        <h1 className="font-display text-4xl text-ink">Mi cuenta</h1>
-        <p className="mt-3 text-muted">
-          Regístrate con tu correo para guardar compras y favoritos en este
-          dispositivo.
-        </p>
-        <button
-          type="button"
-          onClick={openAuth}
-          className="mt-8 rounded-full bg-ink px-8 py-3 text-sm font-semibold text-white"
-        >
-          Registrarme
-        </button>
-        <Link
-          href="/favoritos"
-          className="mt-4 block text-sm font-medium text-accent-deep underline"
-        >
-          Ver favoritos
-        </Link>
+      <div className="mx-auto max-w-lg px-4 pb-28 pt-24 sm:px-6 sm:pt-28">
+        <div className="overflow-hidden rounded-3xl border border-line bg-surface shadow-[0_12px_40px_rgba(31,28,24,0.06)]">
+          <div className="border-b border-line bg-gradient-to-br from-[#ebe4d6] via-surface to-[#ddd4c4]/40 px-6 py-8 text-center sm:px-8 sm:py-10">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-line bg-white/80">
+              <UserMark />
+            </div>
+            <h1 className="mt-4 font-display text-3xl text-ink sm:text-4xl">
+              Mi cuenta
+            </h1>
+            <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted sm:text-base">
+              Inicia sesión para ver tu perfil, favoritos e historial. Si eres
+              nuevo, crea una cuenta en segundos.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3 p-5 sm:p-6">
+            <button
+              type="button"
+              onClick={() => openAuth("login")}
+              className="w-full rounded-full bg-ink py-3.5 text-sm font-semibold text-white transition hover:bg-accent-deep active:scale-[0.98]"
+            >
+              Iniciar sesión
+            </button>
+            <button
+              type="button"
+              onClick={() => openAuth("register")}
+              className="w-full rounded-full border border-line bg-background py-3.5 text-sm font-semibold text-ink transition hover:border-accent/40 hover:bg-surface-2/50 active:scale-[0.98]"
+            >
+              Crear cuenta
+            </button>
+            <Link
+              href="/favoritos"
+              className="mt-1 py-2 text-center text-sm font-medium text-accent-deep underline underline-offset-2"
+            >
+              Ver favoritos sin cuenta
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-20 pt-28 sm:px-6">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-            Perfil
-          </p>
-          <h1 className="mt-2 font-display text-4xl text-ink">Hola, {user.name}</h1>
-          <p className="mt-2 text-muted">{user.email}</p>
-          {user.phone && <p className="text-sm text-muted">{user.phone}</p>}
+    <div className="mx-auto max-w-6xl px-4 pb-28 pt-24 sm:px-6 sm:pb-20 sm:pt-28">
+      <div className="rounded-3xl border border-line bg-surface p-5 sm:p-6">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+          <div className="flex items-start gap-4">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-surface-2 text-lg font-bold text-ink">
+              {user.name.trim().charAt(0).toUpperCase() || "P"}
+            </div>
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+                Perfil
+              </p>
+              <h1 className="mt-1 font-display text-2xl text-ink sm:text-3xl">
+                Hola, {user.name.split(" ")[0]}
+              </h1>
+              <p className="mt-1 truncate text-sm text-muted">{user.email}</p>
+              {user.phone && (
+                <p className="text-sm text-muted">{user.phone}</p>
+              )}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+            <button
+              type="button"
+              onClick={() => openAuth("profile")}
+              className="rounded-full border border-line bg-background px-4 py-2.5 text-sm font-semibold text-ink sm:px-5"
+            >
+              Editar
+            </button>
+            <button
+              type="button"
+              onClick={logout}
+              className="rounded-full border border-line px-4 py-2.5 text-sm font-semibold text-muted hover:text-ink sm:px-5"
+            >
+              Salir
+            </button>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={openAuth}
-            className="rounded-full border border-line bg-surface px-5 py-2.5 text-sm font-semibold text-ink"
+
+        <div className="mt-5 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+          <Link
+            href="/favoritos"
+            className="rounded-full bg-ink px-4 py-2.5 text-center text-sm font-semibold text-white sm:px-5"
           >
-            Editar datos
-          </button>
-          <button
-            type="button"
-            onClick={logout}
-            className="rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-muted hover:text-ink"
+            Favoritos
+          </Link>
+          <Link
+            href="/carrito"
+            className="rounded-full border border-line bg-background px-4 py-2.5 text-center text-sm font-semibold text-ink sm:px-5"
           >
-            Cerrar sesión
-          </button>
+            Carrito
+          </Link>
         </div>
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Link
-          href="/favoritos"
-          className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white"
-        >
-          Mis favoritos
-        </Link>
-        <Link
-          href="/carrito"
-          className="rounded-full border border-line bg-surface px-5 py-2.5 text-sm font-semibold text-ink"
-        >
-          Ir al carrito
-        </Link>
-      </div>
-
-      <section className="mt-12">
-        <h2 className="font-display text-2xl text-ink">Historial de compras</h2>
+      <section className="mt-8 sm:mt-10">
+        <h2 className="font-display text-xl text-ink sm:text-2xl">
+          Historial de compras
+        </h2>
         <p className="mt-1 text-sm text-muted">
           Pedidos confirmados desde este dispositivo.
         </p>
 
         {purchases.length === 0 ? (
-          <div className="mt-6 rounded-2xl border border-line bg-surface p-8 text-center">
+          <div className="mt-5 rounded-2xl border border-dashed border-line bg-surface/80 px-5 py-10 text-center">
             <p className="text-muted">Aún no hay compras registradas.</p>
             <Link
-              href="/#tienda"
-              className="mt-4 inline-block text-sm font-semibold text-accent-deep underline"
+              href="/catalogo"
+              className="mt-4 inline-block text-sm font-semibold text-accent-deep underline underline-offset-2"
             >
-              Empezar a comprar
+              Ir a la tienda
             </Link>
           </div>
         ) : (
-          <ul className="mt-6 space-y-4">
+          <ul className="mt-5 space-y-3 sm:space-y-4">
             {purchases.map((order) => (
               <li
                 key={order.id}
-                className="rounded-2xl border border-line bg-surface p-5"
+                className="rounded-2xl border border-line bg-surface p-4 sm:p-5"
               >
                 <div className="flex flex-wrap items-start justify-between gap-2">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">
                       {order.id}
                     </p>
                     <p className="mt-1 text-sm text-ink">
@@ -112,7 +145,7 @@ export default function CuentaPage() {
                       })}
                     </p>
                   </div>
-                  <p className="font-display text-xl text-ink">
+                  <p className="font-display text-lg text-ink sm:text-xl">
                     {formatPrice(order.total)}
                   </p>
                 </div>
@@ -126,7 +159,7 @@ export default function CuentaPage() {
                       key={`${order.id}-${item.productId}-${item.size}-${item.color}`}
                       className="flex items-center gap-3"
                     >
-                      <div className="relative h-12 w-12 overflow-hidden rounded-lg bg-surface-2">
+                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-surface-2">
                         <AppImage
                           src={item.image}
                           alt={item.name}
@@ -143,7 +176,7 @@ export default function CuentaPage() {
                           {item.size} · {item.color} · x{item.quantity}
                         </p>
                       </div>
-                      <p className="text-sm font-medium text-ink">
+                      <p className="shrink-0 text-sm font-medium text-ink">
                         {formatPrice(item.price * item.quantity)}
                       </p>
                     </div>
@@ -155,5 +188,19 @@ export default function CuentaPage() {
         )}
       </section>
     </div>
+  );
+}
+
+function UserMark() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.75" />
+      <path
+        d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
