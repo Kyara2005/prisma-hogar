@@ -15,7 +15,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/50 to-ink/25" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-ink/30" />
 
-      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20 md:justify-center md:pb-0">
+      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-4 pb-28 pt-24 sm:px-6 sm:pb-20 sm:pt-28 md:justify-center md:pb-0">
         <div className="max-w-xl animate-rise">
           <div className="mb-5 flex items-center gap-3">
             <AppImage

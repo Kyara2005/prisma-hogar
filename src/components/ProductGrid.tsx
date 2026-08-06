@@ -15,7 +15,7 @@ export function ProductGrid() {
   }, []);
 
   return (
-    <section id="tienda" className="scroll-mt-24 py-20 sm:py-24">
+    <section id="tienda" className="scroll-mt-24 py-14 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="max-w-2xl animate-rise">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
@@ -30,7 +30,7 @@ export function ProductGrid() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
           {preview.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

@@ -41,6 +41,16 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/favoritos" className="hover:text-white">
+                Favoritos
+              </Link>
+            </li>
+            <li>
+              <Link href="/cuenta" className="hover:text-white">
+                Mi cuenta
+              </Link>
+            </li>
+            <li>
               <Link href="/#nosotros" className="hover:text-white">
                 Nosotros
               </Link>

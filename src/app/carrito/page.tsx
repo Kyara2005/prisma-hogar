@@ -1,18 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useCart } from "@/context/CartContext";
+import {
+  cartItemsToPurchaseItems,
+  useUser,
+} from "@/context/UserContext";
 import { formatPrice } from "@/data/products";
 import { AppImage } from "@/components/AppImage";
 
 export default function CarritoPage() {
   const { items, updateQuantity, removeItem, subtotal, clearCart } = useCart();
+  const { user, openAuth, savePurchase, updateProfile } = useUser();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [note, setNote] = useState("");
   const [sent, setSent] = useState(false);
+
+  useEffect(() => {
+    if (!user) return;
+    setName((prev) => prev || user.name);
+    setPhone((prev) => prev || user.phone || "");
+  }, [user]);
 
   const shipping = items.length > 0 ? 3.5 : 0;
   const total = useMemo(() => subtotal + shipping, [subtotal, shipping]);
@@ -20,6 +31,25 @@ export default function CarritoPage() {
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
     if (items.length === 0) return;
+
+    if (!user) {
+      openAuth();
+      return;
+    }
+
+    savePurchase({
+      total,
+      shipping,
+      address,
+      phone,
+      note: note || undefined,
+      items: cartItemsToPurchaseItems(items),
+    });
+
+    updateProfile({
+      name,
+      phone: phone || undefined,
+    });
 
     const lines = items
       .map(
@@ -35,30 +65,54 @@ export default function CarritoPage() {
       `Envío estimado: ${formatPrice(shipping)}%0A` +
       `Total: ${formatPrice(total)}%0A%0A` +
       `Nombre: ${name}%0A` +
+      `Correo: ${user.email}%0A` +
       `Teléfono: ${phone}%0A` +
       `Dirección: ${address}%0A` +
       (note ? `Nota: ${note}%0A` : "");
 
     window.open(`https://wa.me/593993480433?text=${message}`, "_blank");
     setSent(true);
+    clearCart();
   };
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-20 pt-28 sm:px-6">
       <h1 className="font-display text-4xl text-ink">Carrito</h1>
       <p className="mt-2 text-muted">
-        Revisa tu pedido y envíalo por WhatsApp para confirmar.
+        Revisa tu pedido y confírmalo por WhatsApp. Se guardará en tu historial.
       </p>
+
+      {!user && (
+        <div className="mt-4 rounded-2xl border border-accent/30 bg-surface p-4 text-sm text-muted">
+          Para guardar la compra en tu cuenta,{" "}
+          <button
+            type="button"
+            onClick={openAuth}
+            className="font-semibold text-accent-deep underline"
+          >
+            regístrate con tu correo
+          </button>
+          .
+        </div>
+      )}
 
       {items.length === 0 ? (
         <div className="mt-12 rounded-2xl border border-line bg-surface p-10 text-center">
           <p className="font-display text-2xl text-ink">Tu carrito está vacío</p>
-          <Link
-            href="/#tienda"
-            className="mt-6 inline-flex rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white"
-          >
-            Explorar productos
-          </Link>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/#tienda"
+              className="inline-flex rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white"
+            >
+              Explorar productos
+            </Link>
+            <Link
+              href="/favoritos"
+              className="inline-flex rounded-full border border-line px-6 py-3 text-sm font-semibold text-ink"
+            >
+              Ver favoritos
+            </Link>
+          </div>
         </div>
       ) : (
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
@@ -141,6 +195,11 @@ export default function CarritoPage() {
 
           <aside className="h-fit rounded-2xl border border-line bg-surface p-6">
             <h2 className="font-display text-2xl text-ink">Resumen</h2>
+            {user && (
+              <p className="mt-1 text-xs text-muted">
+                Cuenta: {user.email}
+              </p>
+            )}
             <dl className="mt-4 space-y-2 text-sm">
               <div className="flex justify-between">
                 <dt className="text-muted">Subtotal</dt>
@@ -190,11 +249,13 @@ export default function CarritoPage() {
                 type="submit"
                 className="w-full rounded-full bg-ink py-3 text-sm font-semibold text-white transition hover:bg-accent-deep"
               >
-                Confirmar por WhatsApp
+                {user
+                  ? "Confirmar y guardar compra"
+                  : "Regístrate para confirmar"}
               </button>
               {sent && (
                 <p className="text-center text-xs text-accent-deep">
-                  Se abrió WhatsApp con tu pedido. ¡Gracias!
+                  Compra guardada. Se abrió WhatsApp con tu pedido.
                 </p>
               )}
             </form>
